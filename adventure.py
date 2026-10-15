@@ -17,9 +17,17 @@ scenes = [
 ]
 
 kind_choices = 0
+garden_route = False
 print("THE PARK WALK\n")
 
 for step, (scene, options) in enumerate(scenes, 1):
+    if step == 2 and garden_route:
+        scene = "In the garden, the jogger pauses beside a bed of drooping flowers."
+        options = [
+            ("Help water the flowers.", 1),
+            ("Ask the gardener about the bright tulips.", 1),
+            ("Follow the garden path toward the bridge.", 0),
+        ]
     print(f"Step {step}: {scene}")
     for number, (option, _) in enumerate(options, 1):
         print(f"  {number}. {option}")
@@ -29,6 +37,8 @@ for step, (scene, options) in enumerate(scenes, 1):
             break
         print("Please enter 1, 2, or 3.")
     kind_choices += options[int(answer) - 1][1]
+    if step == 1:
+        garden_route = answer == "2"
     print()
 
 if kind_choices >= 2:
